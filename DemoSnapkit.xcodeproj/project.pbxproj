@@ -18,13 +18,13 @@
 		86619B3A2ACD195100CA19E9 /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 86619B392ACD195100CA19E9 /* heart.png */; };
 		86619B412ACD1F2D00CA19E9 /* ViewForSelectionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86619B402ACD1F2D00CA19E9 /* ViewForSelectionBar.swift */; };
 		86619B552ACD244100CA19E9 /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86619B542ACD244100CA19E9 /* x.png */; };
-		86619B5C2ACD2E1600CA19E9 /* TypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86619B5B2ACD2E1600CA19E9 /* TypeView.swift */; };
 		866958EB2AC92B12002A2F44 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866958EA2AC92B12002A2F44 /* MainViewController.swift */; };
 		866958F32ACAB289002A2F44 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 866958F22ACAB289002A2F44 /* search.png */; };
 		866976D02AC7E3A7003845B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866976CF2AC7E3A7003845B2 /* AppDelegate.swift */; };
 		866976D22AC7E3A7003845B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866976D12AC7E3A7003845B2 /* SceneDelegate.swift */; };
 		866976D92AC7E3AA003845B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 866976D82AC7E3AA003845B2 /* Assets.xcassets */; };
 		866976DC2AC7E3AA003845B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 866976DA2AC7E3AA003845B2 /* LaunchScreen.storyboard */; };
+		86FAC3AD2AD5470400BC8BCD /* FlexibleWidthLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FAC3AC2AD5470400BC8BCD /* FlexibleWidthLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +38,6 @@
 		86619B392ACD195100CA19E9 /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
 		86619B402ACD1F2D00CA19E9 /* ViewForSelectionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForSelectionBar.swift; sourceTree = "<group>"; };
 		86619B542ACD244100CA19E9 /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = x.png; sourceTree = "<group>"; };
-		86619B5B2ACD2E1600CA19E9 /* TypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeView.swift; sourceTree = "<group>"; };
 		866958EA2AC92B12002A2F44 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		866958F22ACAB289002A2F44 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		866976CC2AC7E3A7003845B2 /* DemoSnapkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoSnapkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +46,7 @@
 		866976D82AC7E3AA003845B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		866976DB2AC7E3AA003845B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		866976DD2AC7E3AA003845B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86FAC3AC2AD5470400BC8BCD /* FlexibleWidthLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleWidthLayout.swift; sourceTree = "<group>"; };
 		96D3B80AF5435AC2BAC2F839 /* Pods-DemoSnapkit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoSnapkit.debug.xcconfig"; path = "Target Support Files/Pods-DemoSnapkit/Pods-DemoSnapkit.debug.xcconfig"; sourceTree = "<group>"; };
 		BC49FE3737EBC3F168FAA205 /* Pods-DemoSnapkit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoSnapkit.release.xcconfig"; path = "Target Support Files/Pods-DemoSnapkit/Pods-DemoSnapkit.release.xcconfig"; sourceTree = "<group>"; };
 		C02288B1C4E1B54B9DA0DD6E /* Pods_DemoSnapkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DemoSnapkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,10 +67,10 @@
 		86619B3B2ACD1E0800CA19E9 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				86FAC3AB2AD5465A00BC8BCD /* SelectionBar */,
 				866958EA2AC92B12002A2F44 /* MainViewController.swift */,
 				86619B312ACC6FB100CA19E9 /* MainViewModel.swift */,
 				86619B402ACD1F2D00CA19E9 /* ViewForSelectionBar.swift */,
-				86619B5B2ACD2E1600CA19E9 /* TypeView.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -108,11 +108,19 @@
 				866976DA2AC7E3AA003845B2 /* LaunchScreen.storyboard */,
 				866976DD2AC7E3AA003845B2 /* Info.plist */,
 				86619B3B2ACD1E0800CA19E9 /* MainView */,
-				86619B2F2ACC6DD400CA19E9 /* ItemSelectionBar.swift */,
 				86619B2B2ACC4DE900CA19E9 /* ObservableObject.swift */,
-				865B3BD92ACE694F0033F425 /* SelectionBar.swift */,
 			);
 			path = DemoSnapkit;
+			sourceTree = "<group>";
+		};
+		86FAC3AB2AD5465A00BC8BCD /* SelectionBar */ = {
+			isa = PBXGroup;
+			children = (
+				86619B2F2ACC6DD400CA19E9 /* ItemSelectionBar.swift */,
+				865B3BD92ACE694F0033F425 /* SelectionBar.swift */,
+				86FAC3AC2AD5470400BC8BCD /* FlexibleWidthLayout.swift */,
+			);
+			path = SelectionBar;
 			sourceTree = "<group>";
 		};
 		D38113B7D983B71AA24B0379 /* Frameworks */ = {
@@ -253,8 +261,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				86619B412ACD1F2D00CA19E9 /* ViewForSelectionBar.swift in Sources */,
-				86619B5C2ACD2E1600CA19E9 /* TypeView.swift in Sources */,
 				866958EB2AC92B12002A2F44 /* MainViewController.swift in Sources */,
+				86FAC3AD2AD5470400BC8BCD /* FlexibleWidthLayout.swift in Sources */,
 				86619B302ACC6DD400CA19E9 /* ItemSelectionBar.swift in Sources */,
 				866976D02AC7E3A7003845B2 /* AppDelegate.swift in Sources */,
 				866976D22AC7E3A7003845B2 /* SceneDelegate.swift in Sources */,

@@ -22,13 +22,13 @@ class MainViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         let searchView = ViewForSelectionBar()
-        searchView.itemSelectionBar = ItemSelectionBar(title: "Tìm kiếm", img: UIImage(named: "search")!, typeView: .search)
+        searchView.itemSelectionBar = ItemSelectionBar(title: "Tìm kiếm", img: UIImage(named: "search")!, isSelected: false)
         
         let centerView = ViewForSelectionBar()
-        centerView.itemSelectionBar = ItemSelectionBar(title: "", img: UIImage(named: "refresh")!, typeView: .refresh)
+        centerView.itemSelectionBar = ItemSelectionBar(title: "", img: UIImage(named: "refresh")!, isSelected: true)
         
         let discoverView = ViewForSelectionBar()
-        discoverView.itemSelectionBar = ItemSelectionBar(title: "Khám phá", img: UIImage(named: "discover")!, typeView: .discover)
+        discoverView.itemSelectionBar = ItemSelectionBar(title: "Khám phá", img: UIImage(named: "discover")!, isSelected: false)
         defaultViewControllers = [searchView, centerView, discoverView]
         viewControllers = defaultViewControllers
         
@@ -45,7 +45,7 @@ class MainViewController: UIViewController{
         contrainSelectionBar()
     
         selectionBar.items = viewControllers.map({  view in
-            view.itemSelectionBar ?? ItemSelectionBar(title: "not set", img:  UIImage(named: "x")!, typeView: .non )
+            view.itemSelectionBar ?? ItemSelectionBar(title: "not set", img:  UIImage(named: "x")!, isSelected: false)
         })
         
         
@@ -56,7 +56,7 @@ class MainViewController: UIViewController{
         selectionBar.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.centerX.equalToSuperview()
-            make.width.equalTo(self.view.frame.width * 65/100)
+            make.width.equalTo(self.view.frame.width * 70/100)
             make.height.equalTo(50)
         }
     

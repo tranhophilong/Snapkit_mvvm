@@ -8,15 +8,14 @@
 
 import UIKit
 
-final class ItemSelectionBar{
+struct ItemSelectionBar{
      var title : String
      var img : UIImage
-        var isHidden : Bool = false
-    let typeView : TypeView
-    init(title: String, img: UIImage, typeView : TypeView) {
+    var isSelected : Bool
+    init(title: String, img: UIImage, isSelected : Bool) {
         self.title = title
         self.img = img
-        self.typeView = typeView
+        self.isSelected = isSelected
     }
     
   

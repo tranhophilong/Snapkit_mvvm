@@ -15,34 +15,76 @@ protocol SelectionBarDelegate : AnyObject{
     
 }
 
-final class SelectionBar : UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+final class SelectionBar : UIView, UICollectionViewDelegate, UICollectionViewDataSource{
      
      var items : [ItemSelectionBar] = [] {
          didSet{
              
+             print(333333)
              collectionViewTabBar.reloadData()
-             collectionViewTabBar.selectItem(at: IndexPath(item: 1, section: 0), animated: false, scrollPosition: .right)
-             delegate?.didSelectedItem(index: 1)
+             for i in 0...items.count - 1{
+                 if items[i].isSelected{
+                     collectionViewTabBar.selectItem(at: IndexPath(item: i, section: 0), animated: false, scrollPosition: .right)
+                     delegate?.didSelectedItem(index: 1)
+                 }
+             }
+            
          }
      }
      
-     private enum EvenClick{
-         case seachClick
-         case refreshClick
-         case discoverClick
-         case personalClick
-         case favoriteClick
-     
-     }
-     
-     private var currentClick : EvenClick = .refreshClick
-     
-     
+          
      weak  var delegate : SelectionBarDelegate?
      
-     private let collectionViewTabBar = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+     private let collectionViewTabBar = UICollectionView(frame: .zero, collectionViewLayout: FlexibleWidthLayout())
      
      
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        layoutSelectionBar()
+        collectionViewTabBar.register(CellForSelectionBar.self, forCellWithReuseIdentifier: CellForSelectionBar.identifier)
+        collectionViewTabBar.delegate = self
+        collectionViewTabBar.dataSource = self
+    }
+    
+
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    private func layoutSelectionBar(){
+        self.backgroundColor = UIColor.darkGray
+        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.cornerRadius = 23
+        self.layer.masksToBounds = true
+        self.addSubview(collectionViewTabBar)
+        layoutCollectionView()
+        
+    }
+    
+    private func layoutCollectionView(){
+        let flowlayout = FlexibleWidthLayout()
+        flowlayout.delegate  = self
+        collectionViewTabBar.contentMode =  .scaleToFill
+        collectionViewTabBar.isScrollEnabled = false
+        collectionViewTabBar.collectionViewLayout = flowlayout
+        collectionViewTabBar.backgroundColor = UIColor.white
+        contrainColletionView()
+        
+    }
+    
+    private func contrainColletionView(){
+        collectionViewTabBar.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
+    }
+    
      func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
          return items.count
@@ -67,119 +109,54 @@ final class SelectionBar : UIView, UICollectionViewDelegate, UICollectionViewDat
          
      }
      
-     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-         var width : CGFloat = 0
-         var  item = items[indexPath.item]
-         
-         switch currentClick {
-         case .seachClick:
-             if item.typeView == .search{
-                 width = self.frame.width * 35/100
-             }else{
-                 width = (self.frame.width - self.frame.width * 35/100) / CGFloat(items.count - 1)
-             }
-         case .refreshClick:
-             width = self.frame.width / CGFloat(items.count)
-         case .discoverClick:
-             if item.typeView == .discover{
-                 width = self.frame.width * 35/100
-             }else{
-                 width = (self.frame.width - self.frame.width * 35/100) / CGFloat(items.count - 1)
-             }
-         case .personalClick:
-             if item.typeView == .peronal{
-                 width = self.frame.width * 35/100
-             }else{
-                 width = (self.frame.width - self.frame.width * 35/100) / CGFloat(items.count - 1)
-             }
-         case .favoriteClick:
-             if item.typeView == .favorite{
-                 width = self.frame.width * 35/100
-             }else{
-                 width = (self.frame.width - self.frame.width * 35/100) / CGFloat(items.count - 1)
-             }
-         }
-         
-
-         return CGSize(width: width - 15, height: self.frame.height - 10)
-     }
-     
 
      
      func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
          delegate?.didSelectedItem(index: indexPath.item)
+         items[indexPath.item].isSelected = true
+         layoutIfNeeded()
 
-         switch items[indexPath.item].typeView{
-         case .refresh:
-             currentClick = .refreshClick
-         case .search:
-             currentClick = .seachClick
-         case .discover:
-             currentClick = .discoverClick
-         case .favorite:
-             currentClick = .favoriteClick
-         case .peronal:
-             currentClick = .personalClick
-         case .non: break
-
-         }
          collectionViewTabBar.collectionViewLayout.invalidateLayout()
-         
+//         items.forEach { item in
+//             print(item.isSelected)
+//         }
+//         
      }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        items[indexPath.item].isSelected = false
+    }
 
 
      
-     override init(frame: CGRect) {
-         super.init(frame: frame)
-         
-         layoutSelectionBar()
-         collectionViewTabBar.register(CellForSelectionBar.self, forCellWithReuseIdentifier: CellForSelectionBar.identifier)
-         collectionViewTabBar.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-         collectionViewTabBar.delegate = self
-         collectionViewTabBar.dataSource = self
-     }
-     
 
-     
-     required init?(coder: NSCoder) {
-         fatalError("init(coder:) has not been implemented")
-     }
-     
-     
-     private func layoutSelectionBar(){
-         self.backgroundColor = UIColor.darkGray
-         self.layer.borderColor = UIColor.white.cgColor
-         self.layer.cornerRadius = 23
-         self.layer.masksToBounds = true
-         self.addSubview(collectionViewTabBar)
-         layoutCollectionView()
-         
-     }
-     
-     private func layoutCollectionView(){
-         let flowlayout = UICollectionViewFlowLayout()
-         flowlayout.scrollDirection = .horizontal
-         flowlayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-         collectionViewTabBar.clipsToBounds  = true
-         collectionViewTabBar.contentMode =  .scaleToFill
-         collectionViewTabBar.isScrollEnabled = false
-         collectionViewTabBar.collectionViewLayout = flowlayout
-         collectionViewTabBar.backgroundColor = UIColor.white
-         contrainColletionView()
-         
-     }
-     
-     private func contrainColletionView(){
-         collectionViewTabBar.snp.makeConstraints { make in
-             make.top.equalToSuperview()
-             make.bottom.equalToSuperview()
-             make.leading.equalToSuperview()
-             make.trailing.equalToSuperview()
-         }
-     }
  }
 
- 
+extension SelectionBar : FlexibleWidthLayoutProtocol{
+    func collectionView(_ collectionView: UICollectionView, sizeItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        
+        var widthForPresentItem = self.frame.width - 20
+        var width  : CGFloat = 0
+        if items[indexPath.item].isSelected == true{
+            width = widthForPresentItem * 50/100
+        }else if items[indexPath.item].isSelected == false{
+            width = (widthForPresentItem / 2 ) / CGFloat(items.count - 1)
+        }
+    
+        
+       return CGSize(width: width,  height: self.frame.height - 10)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, insetsForItemsInSection section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, itemSpacingInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    
+}
  
  class CellForSelectionBar : UICollectionViewCell{
      
@@ -203,22 +180,21 @@ final class SelectionBar : UIView, UICollectionViewDelegate, UICollectionViewDat
      override var isSelected: Bool{
          didSet{
              if isSelected{
-                 UIView.animate(withDuration: 0.3) { [weak self] in
+                 UIView.animate(withDuration: 0.5) { [weak self] in
                      guard let self = self else{
                          return
                      }
                      stackView.backgroundColor = UIColor.customGreen
                      titleView.isHidden = false
+                     
+                     
                  }
              
-//
              }else{
-                 UIView.animate(withDuration: 0.3) {  [weak self] in
-                     
+                 UIView.animate(withDuration: 0.5) {  [weak self] in
                      guard let self = self else{
                          return
                      }
-                     
                      stackView.backgroundColor = UIColor.white
                      titleView.isHidden = true
                  }
