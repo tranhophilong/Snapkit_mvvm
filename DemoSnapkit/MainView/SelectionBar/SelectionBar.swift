@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 protocol SelectionBarDelegate : AnyObject{
-   func didSelectedItem(index: Int)
+   func didSelectedItem(at index: Int)
     
 }
 
@@ -19,13 +19,11 @@ final class SelectionBar : UIView, UICollectionViewDelegate, UICollectionViewDat
      
      var items : [ItemSelectionBar] = [] {
          didSet{
-             
-             print(333333)
              collectionViewTabBar.reloadData()
              for i in 0...items.count - 1{
                  if items[i].isSelected{
                      collectionViewTabBar.selectItem(at: IndexPath(item: i, section: 0), animated: false, scrollPosition: .right)
-                     delegate?.didSelectedItem(index: 1)
+                     delegate?.didSelectedItem(at: i)
                  }
              }
             
@@ -56,9 +54,8 @@ final class SelectionBar : UIView, UICollectionViewDelegate, UICollectionViewDat
     
     
     private func layoutSelectionBar(){
-        self.backgroundColor = UIColor.darkGray
         self.layer.borderColor = UIColor.white.cgColor
-        self.layer.cornerRadius = 23
+        self.layer.cornerRadius = 57/2
         self.layer.masksToBounds = true
         self.addSubview(collectionViewTabBar)
         layoutCollectionView()
@@ -112,15 +109,9 @@ final class SelectionBar : UIView, UICollectionViewDelegate, UICollectionViewDat
 
      
      func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-         delegate?.didSelectedItem(index: indexPath.item)
+         delegate?.didSelectedItem(at: indexPath.item)
          items[indexPath.item].isSelected = true
-         layoutIfNeeded()
-
          collectionViewTabBar.collectionViewLayout.invalidateLayout()
-//         items.forEach { item in
-//             print(item.isSelected)
-//         }
-//         
      }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -184,7 +175,11 @@ extension SelectionBar : FlexibleWidthLayoutProtocol{
                      guard let self = self else{
                          return
                      }
-                     stackView.backgroundColor = UIColor.customGreen
+                     if titleView.text == ""{
+                         stackView.backgroundColor = UIColor.white
+                     }else{
+                         stackView.backgroundColor = UIColor.customGreen
+                     }
                      titleView.isHidden = false
                      
                      
@@ -198,6 +193,8 @@ extension SelectionBar : FlexibleWidthLayoutProtocol{
                      stackView.backgroundColor = UIColor.white
                      titleView.isHidden = true
                  }
+                 
+                 
                
              }
              
