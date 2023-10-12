@@ -8,13 +8,21 @@
 import UIKit
 import SnapKit
 
+protocol OCBViewDelegate {
+    func navToOtherView(item : QuickAccessibilityItem)
+}
+
 class OCBView: ViewForSelectionBar, QuickAccessibilityViewDelegate{
+    func navToQuickAccessView(at index: Int) {
+        delegate?.navToOtherView(item: items[index])
+    }
+    
     func expandQuickAccessibilityView() {
         viewWillLayoutSubviews()
     }
     
-
-    
+    let viewModel = MainViewModel()
+    var delegate : OCBViewDelegate?
     private lazy var  backgroundView = UIImageView(frame: .zero)
     private let items : [QuickAccessibilityItem] = [
         QuickAccessibilityItem(image: UIImage(systemName: "heart", withConfiguration: UIImage.SymbolConfiguration(weight: .medium))!, title: "Yêu thích"),
@@ -27,7 +35,7 @@ class OCBView: ViewForSelectionBar, QuickAccessibilityViewDelegate{
         QuickAccessibilityItem(image: UIImage(systemName: "qrcode", withConfiguration: UIImage.SymbolConfiguration(weight: .medium))!, title: "Quét mã"),
         QuickAccessibilityItem(image: UIImage(systemName: "qrcode", withConfiguration: UIImage.SymbolConfiguration(weight: .medium))!, title: "Quét mã"),
     ]
-    private lazy var quickAccessibilityView  = QuickAccessibilityView(frame: .zero, items: items, balance: "500,000,000 VND")
+    private lazy var quickAccessibilityView  = QuickAccessibilityView(frame: .zero, items: items, balance: "VND")
     private  var heightquickAccessibilityView : Constraint!
     private let label = UILabel(frame: .zero)
 
@@ -40,9 +48,20 @@ class OCBView: ViewForSelectionBar, QuickAccessibilityViewDelegate{
 
         layout()
         contrain()
-        
-
+        setupBinder()
+//        viewModel.getUser()
     }
+    
+    
+    func setupBinder(){
+        viewModel.user.bind { [weak self] user in
+            self!.quickAccessibilityView.balance = user.balance + " " +  self!.quickAccessibilityView.balance
+        }
+    }
+    
+    
+    
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -99,6 +118,7 @@ class OCBView: ViewForSelectionBar, QuickAccessibilityViewDelegate{
 
 protocol QuickAccessibilityViewDelegate : AnyObject{
     func expandQuickAccessibilityView()
+    func navToQuickAccessView(at index : Int)
 }
 
 
@@ -106,7 +126,13 @@ class QuickAccessibilityView : UIView, UICollectionViewDelegate, UICollectionVie
     
     let items : [QuickAccessibilityItem]
     let collectionViewForQuickAccess : UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-    let balance : String
+    var balance : String{
+        
+        didSet{
+            collectionViewForQuickAccess.reloadInputViews()
+        }
+        
+    }
     var isExpand : Bool = false
     var delegate : QuickAccessibilityViewDelegate?
     
@@ -240,6 +266,10 @@ class QuickAccessibilityView : UIView, UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: self.frame.width, height: 50)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.navToQuickAccessView(at: indexPath.item)
     }
     
     

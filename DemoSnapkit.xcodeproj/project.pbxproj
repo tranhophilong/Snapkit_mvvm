@@ -57,6 +57,8 @@
 		86FAC3F32AD7C3AF00BC8BCD /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86FAC3E12AD7C3AF00BC8BCD /* Roboto-Bold.ttf */; };
 		86FAC3F42AD7C3AF00BC8BCD /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86FAC3E22AD7C3AF00BC8BCD /* Roboto-Thin.ttf */; };
 		86FAC3F52AD7C3AF00BC8BCD /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86FAC3E32AD7C3AF00BC8BCD /* Roboto-Black.ttf */; };
+		86FAC3F72AD8619B00BC8BCD /* ViewQuickAccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FAC3F62AD8619B00BC8BCD /* ViewQuickAccessController.swift */; };
+		86FAC3FA2AD86BEE00BC8BCD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FAC3F92AD86BED00BC8BCD /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +113,8 @@
 		86FAC3E12AD7C3AF00BC8BCD /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		86FAC3E22AD7C3AF00BC8BCD /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		86FAC3E32AD7C3AF00BC8BCD /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		86FAC3F62AD8619B00BC8BCD /* ViewQuickAccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewQuickAccessController.swift; sourceTree = "<group>"; };
+		86FAC3F92AD86BED00BC8BCD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		96D3B80AF5435AC2BAC2F839 /* Pods-DemoSnapkit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoSnapkit.debug.xcconfig"; path = "Target Support Files/Pods-DemoSnapkit/Pods-DemoSnapkit.debug.xcconfig"; sourceTree = "<group>"; };
 		BC49FE3737EBC3F168FAA205 /* Pods-DemoSnapkit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoSnapkit.release.xcconfig"; path = "Target Support Files/Pods-DemoSnapkit/Pods-DemoSnapkit.release.xcconfig"; sourceTree = "<group>"; };
 		C02288B1C4E1B54B9DA0DD6E /* Pods_DemoSnapkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DemoSnapkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,7 +137,6 @@
 			children = (
 				86FAC3AB2AD5465A00BC8BCD /* SelectionBar */,
 				866958EA2AC92B12002A2F44 /* MainViewController.swift */,
-				86619B312ACC6FB100CA19E9 /* MainViewModel.swift */,
 				86619B402ACD1F2D00CA19E9 /* ViewForSelectionBar.swift */,
 			);
 			path = MainView;
@@ -167,6 +170,8 @@
 				866976D82AC7E3AA003845B2 /* Assets.xcassets */,
 				866976DA2AC7E3AA003845B2 /* LaunchScreen.storyboard */,
 				866976DD2AC7E3AA003845B2 /* Info.plist */,
+				86FAC3FB2AD86CBE00BC8BCD /* ViewModel */,
+				86FAC3F82AD86BD400BC8BCD /* Model */,
 				86FAC3B02AD59C5B00BC8BCD /* OCBView */,
 				86619B3B2ACD1E0800CA19E9 /* MainView */,
 				86619B2B2ACC4DE900CA19E9 /* ObservableObject.swift */,
@@ -188,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				86FAC3B12AD59C8C00BC8BCD /* OCBView.swift */,
+				86FAC3F62AD8619B00BC8BCD /* ViewQuickAccessController.swift */,
 			);
 			path = OCBView;
 			sourceTree = "<group>";
@@ -249,6 +255,22 @@
 				86FAC3E32AD7C3AF00BC8BCD /* Roboto-Black.ttf */,
 			);
 			path = roboto;
+			sourceTree = "<group>";
+		};
+		86FAC3F82AD86BD400BC8BCD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				86FAC3F92AD86BED00BC8BCD /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		86FAC3FB2AD86CBE00BC8BCD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				86619B312ACC6FB100CA19E9 /* MainViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		D38113B7D983B71AA24B0379 /* Frameworks */ = {
@@ -427,6 +449,8 @@
 				86FAC3B22AD59C8C00BC8BCD /* OCBView.swift in Sources */,
 				866976D22AC7E3A7003845B2 /* SceneDelegate.swift in Sources */,
 				865B3BDA2ACE694F0033F425 /* SelectionBar.swift in Sources */,
+				86FAC3FA2AD86BEE00BC8BCD /* User.swift in Sources */,
+				86FAC3F72AD8619B00BC8BCD /* ViewQuickAccessController.swift in Sources */,
 				86619B2C2ACC4DE900CA19E9 /* ObservableObject.swift in Sources */,
 				86619B322ACC6FB100CA19E9 /* MainViewModel.swift in Sources */,
 			);

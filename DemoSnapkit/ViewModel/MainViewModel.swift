@@ -10,7 +10,8 @@ import Foundation
 
 class MainViewModel{
     
-
+    var user : ObservableObject<User> = ObservableObject(UserData.user)
+    
     
     
 }

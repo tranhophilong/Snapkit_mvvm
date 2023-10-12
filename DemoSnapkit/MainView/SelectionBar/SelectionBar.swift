@@ -22,6 +22,7 @@ final class SelectionBar : UIView, UICollectionViewDelegate, UICollectionViewDat
              collectionViewTabBar.reloadData()
              for i in 0...items.count - 1{
                  if items[i].isSelected{
+                     print(444)
                      collectionViewTabBar.selectItem(at: IndexPath(item: i, section: 0), animated: false, scrollPosition: .right)
                      delegate?.didSelectedItem(at: i)
                  }
