@@ -50,6 +50,8 @@ class OCBView: ViewForSelectionBar, QuickAccessibilityViewDelegate{
         contrain()
         setupBinder()
 //        viewModel.getUser()
+        
+        print("commit after deleting the pod file")
     }
     
     
