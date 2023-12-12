@@ -148,7 +148,7 @@ class QuickAccessibilityView : UIView, UICollectionViewDelegate, UICollectionVie
         self.items = items
        
         super.init(frame: frame)
-        
+
         setup()
         layoutView()
         contrain()

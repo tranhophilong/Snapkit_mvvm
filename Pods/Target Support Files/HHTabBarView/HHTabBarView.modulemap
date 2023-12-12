@@ -1,6 +1,0 @@
-framework module HHTabBarView {
-  umbrella header "HHTabBarView-umbrella.h"
-
-  export *
-  module * { export * }
-}
